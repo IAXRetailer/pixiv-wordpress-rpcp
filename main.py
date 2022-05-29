@@ -8,11 +8,17 @@ def posterui():
       litelogger.infolog("Login as       |"+Fore.LIGHTGREEN_EX+post.USER)
       litelogger.infolog("Password is    |"+Fore.LIGHTGREEN_EX+uncp)
       litelogger.infolog("Target Site is |"+Fore.LIGHTGREEN_EX+post.SITE)
+      print(Fore.LIGHTGREEN_EX+"\n\n###########################")
+      for i in listdir("resource/images"):
+            print(Fore.LIGHTGREEN_EX+i)
+      print(Fore.LIGHTGREEN_EX+"###########################")
+      schedule=reader.get_schedule("schedule.txt")
+      
 def downloadui():
       schedule=reader.get_schedule("schedule.txt")
       for i in schedule:
-            illustidlist,titlelist,pagecount,tagslist,userlist=pixiv(i)
-            writer.datedir(i)
+            #illustidlist,titlelist,pagecount,tagslist,userlist=pixiv(i)
+            writer.datedir("resource",i)
 def chosemode():
       modelist=[1,2,3,4]
       print(Fore.LIGHTMAGENTA_EX+ui)
@@ -39,7 +45,10 @@ def chosemode():
             for i,j in cfg.items():
                   print(Fore.LIGHTWHITE_EX+i,Fore.LIGHTGREEN_EX+j)
             litelogger.infolog("Pick up finished")
-
+      if mode==2:
+            posterui()
+      if mode==1:
+            downloadui()
 
 title=r'''
 

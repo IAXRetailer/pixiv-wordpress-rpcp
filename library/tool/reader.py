@@ -17,7 +17,9 @@ def pickupcfg(target):
 def get_schedule(target):
     schedulelist=open(target,"r").read().splitlines()
     if len(schedulelist)==1 and schedulelist[0] == "None":
-        return None
+        datelist=[]
+        datelist.append(time.getdate())
+        return datelist
     elif len(schedulelist)==1 and schedulelist[0] != "None":
         if "~" in schedulelist[0]:
             begin,end=schedule_list(schedulelist[0])
@@ -35,10 +37,10 @@ def get_schedule(target):
             else:
                 schedules.append(i)
         return schedules
-    elif schedulelist==[]:
-        return None
     else:
-        return None
+        datelist=[]
+        datelist.append(time.getdate())
+        return datelist
 
 def schedule_list(format_string):
     begin,end=format_string.split("~")[0],format_string.split("~")[1]
