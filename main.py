@@ -1,6 +1,7 @@
 from library.pixiv.api import pixiv
 from library.tool import *
 from os import listdir
+from shutil import rmtree
 import post
 def posterui():
       post.USER,post.PASSWORD,post.SITE=cfg["USER"],cfg["PASSWORD"],cfg["SITE"]
@@ -19,8 +20,14 @@ def downloadui():
       for i in schedule:
             #illustidlist,titlelist,pagecount,tagslist,userlist=pixiv(i)
             writer.datedir("resource",i)
+
+def archiveui():
+      print(Fore.LIGHTGREEN_EX+"\n\n###########################")
+      for i in listdir("resource/images"):
+            print(Fore.LIGHTGREEN_EX+i)
+      print(Fore.LIGHTGREEN_EX+"###########################")
 def chosemode():
-      modelist=[1,2,3,4]
+      modelist=[1,2,3,4,5,6]
       print(Fore.LIGHTMAGENTA_EX+ui)
       while True:
             print(Fore.LIGHTYELLOW_EX+"Chose the mode now—>",end="")
@@ -34,12 +41,20 @@ def chosemode():
                         
             except:
                   print(Fore.LIGHTRED_EX+"It's not a legal mode!")
-      if mode==4:
+      if mode==6:
             print(Fore.LIGHTYELLOW_EX+"Are you sure(y/n)—>",end="")
             c=input()
             if c =="y" or c=="yes" or c=="Y":
                   exit()
+      if mode==5:
+            print(Fore.LIGHTYELLOW_EX+"Are you sure(y/n)—>",end="")
+            c=input()
+            if c =="y" or c=="yes" or c=="Y":
+                  for i in listdir("resource/images"):
+                        rmtree("resource/images/"+i)
       if mode==3:
+            archiveui()
+      if mode==4:
             litelogger.infolog("Pick up config now...")
             cfg=reader.pickupcfg(".setting.txt")
             for i,j in cfg.items():
@@ -69,8 +84,10 @@ ui=r'''
 
 [1]Pixiv UI
 [2]Post UI
-[3]Refresh the config
-[4]Exit
+[3]Archive UI
+[4]Refresh the config
+[5]Make the "resource/images" Empty
+[6]Exit
 
 '''
 if "resource" not in listdir():
