@@ -1,6 +1,7 @@
 from library.pixiv.api import pixiv
 from library.tool import *
-from os import listdir
+from library.aria import *
+from os import listdir,system
 from shutil import rmtree
 import post
 def posterui():
@@ -18,9 +19,22 @@ def posterui():
       
 def downloadui():
       schedule=reader.get_schedule("schedule.txt")
+      if cfg["ARIA_ARGV"] == "None":
+            customkeylist,customvaulist=None,None
+      else:
+            customkeylist,customvaulist=[],[]
+            for i in cfg["ARIA_ARGV"].split(","):
+                  customkeylist.append(i.split(":")[0])
+                  customvaulist.append(i.split(":")[1])
+      
       for i in schedule:
-            #illustidlist,titlelist,pagecount,tagslist,userlist=pixiv(i)
+            litelogger.infolog("remote to "+i)
+            illustidlist,titlelist,pagecount,tagslist,userlist=pixiv(i)
             writer.datedir("resource",i)
+            for j in ms_arialist(pagecount,illustidlist,titlelist):
+                  post_to_aria("resource",i,j["url"],j["out"],customkeylist,customvaulist,cfg["PORT"])
+            
+      
 
 def archiveui():
       print(Fore.LIGHTGREEN_EX+"\n\n###########################")
@@ -102,5 +116,7 @@ litelogger.colorprint(title,Fore.GREEN)
 litelogger.infolog("Pick up config now...")
 cfg=reader.pickupcfg(".setting.txt")
 litelogger.infolog("Pick up finished")
+if cfg["ARIA_LA"]=="True":
+      system("Start aria2c --conf-path=./aria2.conf")
 while True:
       chosemode()

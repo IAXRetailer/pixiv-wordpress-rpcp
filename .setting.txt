@@ -8,6 +8,10 @@ SITE=https://www.domain.com/xmlrpc.php
 #
 #aria自定义参数(参数1:值,参数2:值)(None为无)
 ARIA_ARGV=None
+#RPC端口
+PORT=6800
+#在开始时自动启动aria
+ARIA_LA=True
 #
 #
 #投稿相关(*为不限制)
