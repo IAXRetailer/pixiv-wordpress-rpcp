@@ -5,7 +5,7 @@ from shutil import rmtree
 import post
 def posterui():
       post.USER,post.PASSWORD,post.SITE=cfg["USER"],cfg["PASSWORD"],cfg["SITE"]
-      uncp=list(post.PASSWORD)[0]+"******"+list(post.PASSWORD)[-1]
+      uncp=list(post.PASSWORD)[0]+"******"
       litelogger.infolog("Login as       |"+Fore.LIGHTGREEN_EX+post.USER)
       litelogger.infolog("Password is    |"+Fore.LIGHTGREEN_EX+uncp)
       litelogger.infolog("Target Site is |"+Fore.LIGHTGREEN_EX+post.SITE)
@@ -13,6 +13,7 @@ def posterui():
       for i in listdir("resource/images"):
             print(Fore.LIGHTGREEN_EX+i)
       print(Fore.LIGHTGREEN_EX+"###########################")
+      
       schedule=reader.get_schedule("schedule.txt")
       
 def downloadui():
@@ -94,6 +95,7 @@ if "resource" not in listdir():
       writer.mkdir("resource")
       writer.mkdir("resource/images")
       writer.mkdir("resource/archives")
+      writer.mkdir("resource/temp")
 
 
 litelogger.colorprint(title,Fore.GREEN)

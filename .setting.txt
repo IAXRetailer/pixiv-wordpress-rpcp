@@ -4,3 +4,16 @@ USER=123
 PASSWORD=456
 #目标网站
 SITE=https://www.domain.com/xmlrpc.php
+#
+#
+#aria自定义参数(参数1:值,参数2:值)(None为无)
+ARIA_ARGV=None
+#
+#
+#投稿相关(*为不限制)
+#最大Tag数（tag将从选择的图片中随机选取）
+MAX_TAG=*
+#最大图片数
+MAX_PICTURE=*
+#图片最大大小（字节大小）
+MAX_SIZE=5120000
