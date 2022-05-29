@@ -1,0 +1,6 @@
+#用户名称
+USER=123
+#登录密码
+PASSWORD=456
+#目标网站
+SITE=https://www.domain.com/xmlrpc.php
