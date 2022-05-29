@@ -29,9 +29,12 @@ def downloadui():
       
       for i in schedule:
             litelogger.infolog("remote to "+i)
-            illustidlist,titlelist,pagecount,tagslist,userlist=pixiv(i)
+            illustidlist,titlelist,pagecount,tagslist,userlist=pixiv(str(i))
             writer.datedir("resource",i)
-            for j in ms_arialist(pagecount,illustidlist,titlelist):
+            arialist=ms_arialist(pagecount,illustidlist,titlelist)
+
+            for j in arialist:
+                  litelogger.infolog(j)
                   post_to_aria("resource",i,j["url"],j["out"],customkeylist,customvaulist,cfg["PORT"])
             
       

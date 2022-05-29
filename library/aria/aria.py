@@ -1,4 +1,3 @@
-import imp
 from urllib.request import urlopen
 from library.tool import litelogger
 import json

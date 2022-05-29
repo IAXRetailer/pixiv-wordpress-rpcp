@@ -1,5 +1,6 @@
 import json
 from requests import get
+from library.tool import litelogger
 from library.tool.time import getdate
 def pixiv(date):
     if date == None:
@@ -10,7 +11,11 @@ def pixiv(date):
     illustidlist,titlelist,pagecount,tagslist,userlist=getinfo(api)
     return illustidlist,titlelist,pagecount,tagslist,userlist
 def getinfo(api):
-    rawjson=json.loads(get(api).text)
+    apitext=get(api).text
+    error="{\"illusts\":[],\"next_url\":null}"
+    if apitext == error:
+        litelogger.errorlog("API is not available now")
+    rawjson=json.loads(apitext)
     illustidlist,titlelist,pagecount,tagslist,userlist=[],[],[],[],[]
     for i in rawjson["illusts"]:
         illustidlist.append(i["id"])
