@@ -77,7 +77,35 @@ def posterui():
             categorylist.append(pcategory)
       litelogger.infolog(str(categorylist))
       post.post_new_article(articletitle,content,categorylist,fintagsl,cfg["STATE"])
-      
+
+def bedpost():
+      print(Fore.LIGHTRED_EX+"Attention You have opened the BED_POST Mode")
+      post.USER,post.PASSWORD,post.SITE=cfg["USER"],cfg["PASSWORD"],cfg["SITE"]
+      uncp=list(post.PASSWORD)[0]+"******"
+      print(Fore.LIGHTGREEN_EX+"\n\n###########################")
+      for i in listdir("resource/images"):
+            print(Fore.LIGHTGREEN_EX+i)
+      print(Fore.LIGHTGREEN_EX+"###########################")
+      #schedule=reader.get_schedule("schedule.txt")
+      print(Fore.LIGHTYELLOW_EX+"Chose a date to init post—>",end="")
+      postdate=input()
+      while postdate not in listdir("resource/images"):
+            print(Fore.RED+"No such folder")
+            print(Fore.LIGHTYELLOW_EX+"Chose a date to init post—>",end="")
+            postdate=input()
+      print(Fore.LIGHTGREEN_EX+postdate)
+      for i in listdir("resource/images/"+postdate):
+            print(Fore.LIGHTGREEN_EX+"    |----"+i)
+      print(Fore.LIGHTYELLOW_EX+"If you want to detele some illusts,you can do it now and then you should [Enter]",end="")
+      input()
+      litelogger.infolog("Login as       |"+Fore.LIGHTGREEN_EX+post.USER)
+      litelogger.infolog("Password is    |"+Fore.LIGHTGREEN_EX+uncp)
+      litelogger.infolog("Target Site is |"+Fore.LIGHTGREEN_EX+post.SITE)
+      articletitle=cfg["TITLE"].replace("$[date]",postdate)
+      litelogger.infolog("Title is "+Fore.LIGHTGREEN_EX+articletitle)
+      listdir("resource/images/"+postdate)
+      return
+
 def downloadui():
       schedule=reader.get_schedule("schedule.txt")
       if cfg["ARIA_ARGV"] == "None":
@@ -106,8 +134,10 @@ def downloadui():
             arialist=ms_arialist(pagecount,illustidlist,titlelist)
 
             for j in arialist:
-                  #litelogger.infolog(j)
-                  post_to_aria("resource",i,j["url"],j["out"],customkeylist,customvaulist,cfg["PORT"])
+                  with open("resource/images/"+i+"/id-index.txt","w",encoding="utf-8") as f:
+                        f.write()
+                  if cfg["OINF"] != True:
+                        post_to_aria("resource",i,j["url"],j["out"],customkeylist,customvaulist,cfg["PORT"])
             
       
 
