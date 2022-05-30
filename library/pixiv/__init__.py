@@ -1,3 +1,3 @@
 from . import api
 
-pixiv=api.getinfo
+pixiv=api.pixiv

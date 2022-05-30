@@ -26,7 +26,7 @@ def get_schedule(target):
             datelist=time.getdatelist(begin,end)
             return datelist
         else:
-            return schedulelist[0]
+            return schedulelist
     elif len(schedulelist)!=1:
         schedules=[]
         for i in schedulelist:

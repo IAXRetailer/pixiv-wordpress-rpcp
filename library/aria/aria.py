@@ -17,8 +17,8 @@ def ms_arialist(pagecont,illustid,titlelist):
     arialist=[]
     for page,pid,title in zip(pagecont,illustid,titlelist):
         if int(page) == 1:
-            arialist.append({"url":"https://pixiv.re/"+pid+".jpg","out":title})
+            arialist.append({"url":"https://pixiv.re/"+str(pid)+".jpg","out":title+".jpg"})
         else:
             for pagenum in range(1,int(page)+1):
-                arialist.append({"url":"https://pixiv.re/"+pid+"-"+pagenum+".jpg","out":title+" "+pagenum})
+                arialist.append({"url":"https://pixiv.re/"+str(pid)+"-"+str(pagenum)+".jpg","out":title+" "+str(pagenum)+".jpg"})
     return arialist
