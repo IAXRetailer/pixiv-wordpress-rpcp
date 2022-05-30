@@ -45,6 +45,8 @@ def posterui():
       for i in localsimgs:
             siteimgsurl.append(post.postimg("resource/temp/"+postdate+"/"+i)["url"])
             litelogger.infolog("post "+i+" successfully")
+      litelogger.infolog("remove temp")
+      rmtree("resource/temp/"+postdate)
       infomation=open("resource/images/"+postdate+"/index.txt","r",encoding="utf-8").read().splitlines()
       Rawtags=[]
       for i in infomation:
