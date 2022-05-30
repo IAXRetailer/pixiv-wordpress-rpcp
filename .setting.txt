@@ -1,9 +1,9 @@
 #用户名称
-USER=123
+USER=admin@127.0.0.1
 #登录密码
-PASSWORD=456
+PASSWORD=password
 #目标网站
-SITE=https://www.domain.com/xmlrpc.php
+SITE=https://127.0.0.1/xmlrpc.php
 #
 #
 #aria自定义参数(参数1:值,参数2:值)(None为无)
@@ -15,8 +15,8 @@ ARIA_LA=True
 #
 #
 #投稿相关(*为不限制)
-#最大Tag数（tag将从选择的图片中随机选取）
-MAX_TAG=1
+#最大Tag数（tag将从选择的图片中随机选取,不填则无tag）
+MAX_TAG=
 #最大图片数
 MAX_PICTURE=1
 #图片最大大小（字节大小）
@@ -24,7 +24,7 @@ MAX_SIZE=5120000
 #自定义标题
 #$[date]为日期
 TITLE=Pixiv $[date] 精选
-#分类（如果需要多个分类使用,切割）
-CATE=插画
+#分类（如果需要多个分类使用,切割,不填则无分类）
+CATE=
 #文章状态(private表示私密的，draft表示草稿，publish表示发布)
 STATE=draft

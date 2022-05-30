@@ -10,7 +10,7 @@ def checkimgsize(imgfile,maxsize):
 def imgzman(imgfile,maxsize):
     while checkimgsize(imgfile,maxsize):
         imga=Image.open(imgfile)
-        w,h=imga.Sized
-        imgb=imga.esize((int(w/2),int(h/2)),Image.ANTIALIAS)
+        w,h=imga.size
+        imgb=imga.resize((int(w/2),int(h/2)),Image.ANTIALIAS)
         imgb.save(imgfile)
         break

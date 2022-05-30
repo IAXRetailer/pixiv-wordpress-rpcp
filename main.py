@@ -58,6 +58,8 @@ def posterui():
                               Rawtags.append(k)
       if cfg["MAX_TAG"] !="*":
             fintagsl=random.sample(Rawtags, int(cfg["MAX_TAG"]))
+      elif cfg["MAX_TAG"] == "":
+            fintagsl=[]
       else:
             fintagsl=Rawtags
       print("Write the article content!(/n is as CRLF)")
@@ -69,8 +71,11 @@ def posterui():
       pcategory=cfg["CATE"]
       if "," in pcategory:
             categorylist=pcategory.split(",")
+      elif pcategory == "":
+            categorylist=[]
       else:
             categorylist.append(pcategory)
+      litelogger.infolog(str(categorylist))
       post.post_new_article(articletitle,content,categorylist,fintagsl,cfg["STATE"])
       
 def downloadui():
