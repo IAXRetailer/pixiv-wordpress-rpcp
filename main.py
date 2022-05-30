@@ -29,8 +29,7 @@ def posterui():
       litelogger.infolog("Password is    |"+Fore.LIGHTGREEN_EX+uncp)
       litelogger.infolog("Target Site is |"+Fore.LIGHTGREEN_EX+post.SITE)
       articletitle=cfg["TITLE"].replace("$[date]",postdate)
-      litelogger.infolog("Title is "+articletitle)
-      random.choices()
+      litelogger.infolog("Title is "+Fore.LIGHTGREEN_EX+articletitle)
       listdir("resource/images/"+postdate)
       if cfg["MAX_PICTURE"] !="*":
             localsimgs=random.sample(listdir("resource/images/"+postdate), int(cfg["MAX_PICTURE"]))
