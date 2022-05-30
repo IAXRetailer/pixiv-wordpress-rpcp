@@ -28,3 +28,5 @@ TITLE=Pixiv $[date] 精选
 CATE=
 #文章状态(private表示私密的，draft表示草稿，publish表示发布)
 STATE=draft
+#使用图床而不是从本地发送图片
+BED=False
