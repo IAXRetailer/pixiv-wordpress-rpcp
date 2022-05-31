@@ -1,13 +1,14 @@
-from traceback import print_tb
-from library.pixiv import pixiv
+from library.pixiv import *
 from library.tool import *
 from library.aria import *
 from os import listdir,system
 from shutil import rmtree,copyfile
-from library.tool import imager
 import post
 import random
 def posterui():
+      if cfg["BEDPOST"] == "True":
+            bedpost()
+            return
       post.USER,post.PASSWORD,post.SITE=cfg["USER"],cfg["PASSWORD"],cfg["SITE"]
       uncp=list(post.PASSWORD)[0]+"******"
       print(Fore.LIGHTGREEN_EX+"\n\n###########################")
@@ -22,8 +23,9 @@ def posterui():
             print(Fore.LIGHTYELLOW_EX+"Chose a date to init post—>",end="")
             postdate=input()
       print(Fore.LIGHTGREEN_EX+postdate)
-      for i in listdir("resource/images/"+postdate):
-            print(Fore.LIGHTGREEN_EX+"    |----"+i)
+      infomation=open("resource/images/"+postdate+"/index.txt","r",encoding="utf-8").read().splitlines()
+      for i in infomation:
+            print(Fore.LIGHTGREEN_EX+"    |----"+i.split("|||")[2])
       print(Fore.LIGHTYELLOW_EX+"If you want to detele some illusts,you can do it now and then you should [Enter]",end="")
       input()
       litelogger.infolog("Login as       |"+Fore.LIGHTGREEN_EX+post.USER)
@@ -48,7 +50,6 @@ def posterui():
             litelogger.infolog("post "+i+" successfully")
       litelogger.infolog("remove temp")
       rmtree("resource/temp/"+postdate)
-      infomation=open("resource/images/"+postdate+"/index.txt","r",encoding="utf-8").read().splitlines()
       Rawtags=[]
       for i in infomation:
             for j in localsimgs:
@@ -80,7 +81,7 @@ def posterui():
       post.post_new_article(articletitle,content,categorylist,fintagsl,cfg["STATE"])
 
 def bedpost():
-      print(Fore.LIGHTRED_EX+"Attention You have opened the BED_POST Mode")
+      litelogger.infolog("Attention You have opened the BED_POST Mode")
       post.USER,post.PASSWORD,post.SITE=cfg["USER"],cfg["PASSWORD"],cfg["SITE"]
       uncp=list(post.PASSWORD)[0]+"******"
       print(Fore.LIGHTGREEN_EX+"\n\n###########################")
@@ -95,8 +96,9 @@ def bedpost():
             print(Fore.LIGHTYELLOW_EX+"Chose a date to init post—>",end="")
             postdate=input()
       print(Fore.LIGHTGREEN_EX+postdate)
-      for i in listdir("resource/images/"+postdate):
-            print(Fore.LIGHTGREEN_EX+"    |----"+i)
+      rawindex=open("resource/images/"+postdate+"/index.txt","r",encoding="utf-8").read().splitlines()
+      for i in rawindex:
+            print(Fore.LIGHTGREEN_EX+"    |----"+i.split("|||")[2])
       print(Fore.LIGHTYELLOW_EX+"If you want to detele some illusts,you can do it now and then you should [Enter]",end="")
       input()
       litelogger.infolog("Login as       |"+Fore.LIGHTGREEN_EX+post.USER)
@@ -104,9 +106,43 @@ def bedpost():
       litelogger.infolog("Target Site is |"+Fore.LIGHTGREEN_EX+post.SITE)
       articletitle=cfg["TITLE"].replace("$[date]",postdate)
       litelogger.infolog("Title is "+Fore.LIGHTGREEN_EX+articletitle)
-      listdir("resource/images/"+postdate)
-      return
-
+      tags,pagecont,illustid,titlelist,sample,Rawtags,taglist=[],[],[],[],[],[],[]
+      for i in rawindex:
+            tags.append(i.split("|||")[0])
+            titlelist.append(i.split("|||")[2])
+            pagecont.append(i.split("|||")[3])
+            illustid.append(i.split("|||")[4])
+      for i in ms_arialist(pagecont,illustid,titlelist):
+            sample.append(i["url"])
+      finimgs=random.sample(sample,int(cfg["MAX_PICTURE"]))
+      for imgs,illustd in zip(finimgs,illustid):
+            if illustd in imgs:
+                  Rawtags.append(illustid.index(illustd))
+      for tagg in Rawtags:
+            taggg=tagg.split(",%,")
+            for tag in taggg:
+                  taglist.append(tag)
+      if cfg["MAX_TAG"] !="*":
+            fintagsl=random.sample(taglist, int(cfg["MAX_TAG"]))
+      elif cfg["MAX_TAG"] == "":
+            fintagsl=[]
+      else:
+            fintagsl=taglist
+      print("Write the article content!(/n is as CRLF)")
+      content=""
+      for surll in finimgs:
+            content=content+"<img src=\""+str(surll)+"\">\n"
+      content=content+input().replace("/n","\n")
+      categorylist=[]
+      pcategory=cfg["CATE"]
+      if "," in pcategory:
+            categorylist=pcategory.split(",")
+      elif pcategory == "":
+            categorylist=[]
+      else:
+            categorylist.append(pcategory)
+      litelogger.infolog(str(categorylist))
+      post.post_new_article(articletitle,content,categorylist,fintagsl,cfg["STATE"])
 def downloadui():
       schedule=reader.get_schedule("schedule.txt")
       if cfg["ARIA_ARGV"] == "None":
@@ -137,7 +173,7 @@ def downloadui():
                   for j in arialist:
                         post_to_aria("resource",i,j["url"],j["out"],customkeylist,customvaulist,cfg["PORT"])
             else:
-                  litelogger.infolog("Only Information Mod has been opened(.setting.OINF)")
+                  litelogger.infolog("Only Information Mod has been opened"+Fore.BLUE+"(.setting.OINF==True)")
             
       
 

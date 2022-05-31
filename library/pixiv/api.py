@@ -12,9 +12,12 @@ def pixiv(date):
     illustidlist,titlelist,pagecount,tagslist,userlist=getinfo(api)
     return illustidlist,titlelist,pagecount,tagslist,userlist
 def getinfo(api):
-    apitext=get(api).text
-    error="{\"illusts\":[],\"next_url\":null}"
-    if apitext == error:
+    try:
+        apitext=get(api).text
+    except:
+        litelogger.errorlog("404")
+        return [],[],[],[],[]
+    if apitext == "{\"illusts\":[],\"next_url\":null}":
         litelogger.errorlog("The date not available now")
         return [],[],[],[],[]
     if apitext == "{\"code\":500,\"msg\":\"请求失败\"}" or apitext=="获取失败":
