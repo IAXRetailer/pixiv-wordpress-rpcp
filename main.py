@@ -58,7 +58,7 @@ def posterui():
                         ib=ia[0].split(",%,")
                         for k in ib:
                               Rawtags.append(k)
-      if cfg["MAX_TAG"] !="*":
+      if cfg["MAX_TAG"] !="*" and cfg["MAX_TAG"] != "":
             fintagsl=random.sample(Rawtags, int(cfg["MAX_TAG"]))
       elif cfg["MAX_TAG"] == "":
             fintagsl=[]
@@ -122,7 +122,7 @@ def bedpost():
             taggg=tagg.split(",%,")
             for tag in taggg:
                   taglist.append(tag)
-      if cfg["MAX_TAG"] !="*":
+      if cfg["MAX_TAG"] !="*" and cfg["MAX_TAG"] != "":
             fintagsl=random.sample(taglist, int(cfg["MAX_TAG"]))
       elif cfg["MAX_TAG"] == "":
             fintagsl=[]
