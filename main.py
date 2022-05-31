@@ -130,12 +130,13 @@ def downloadui():
                                     sorttag=fintag
                               else:
                                     sorttag=sorttag+",%,"+fintag
-                        f.write(sorttag+"|||"+usr["name"]+"|||"+title+"|||"+count+"|||"+illust+"\n")
+                        f.write(sorttag+"|||"+usr["name"]+"|||"+title+"|||"+str(count)+"|||"+str(illust)+"\n")
             arialist=ms_arialist(pagecount,illustidlist,titlelist)
-
-            for j in arialist:
-                  if cfg["OINF"] != True:
+            if cfg["OINF"] != "True":
+                  for j in arialist:
                         post_to_aria("resource",i,j["url"],j["out"],customkeylist,customvaulist,cfg["PORT"])
+            else:
+                  litelogger.infolog("Only Information Mod has been opened")
             
       
 
