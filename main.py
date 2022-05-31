@@ -114,7 +114,10 @@ def bedpost():
             illustid.append(i.split("|||")[4])
       for i in ms_arialist(pagecont,illustid,titlelist):
             sample.append(i["url"])
-      finimgs=random.sample(sample,int(cfg["MAX_PICTURE"]))
+      if cfg["MAX_PICTURE"] != "*":
+            finimgs=random.sample(sample,int(cfg["MAX_PICTURE"]))
+      else:
+            finimgs=sample
       for imgs,illustd in zip(finimgs,illustid):
             if illustd in imgs:
                   Rawtags.append(illustid.index(illustd))
