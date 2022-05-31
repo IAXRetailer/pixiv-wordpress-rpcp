@@ -120,7 +120,7 @@ def downloadui():
             illustidlist,titlelist,pagecount,tagslist,userlist=pixiv(str(i))
             writer.datedir("resource",i)
             with open("resource/images/"+i+"/index.txt","w",encoding="utf-8") as f:
-                  for tag,usr,title in zip(tagslist,userlist,titlelist):
+                  for tag,usr,title,count,illust in zip(tagslist,userlist,titlelist,pagecount,illustidlist):
                         taggslist=[]
                         for tagg in tag:
                               taggslist.append(tagg["name"])
@@ -130,12 +130,10 @@ def downloadui():
                                     sorttag=fintag
                               else:
                                     sorttag=sorttag+",%,"+fintag
-                        f.write(sorttag+"|||"+usr["name"]+"|||"+title+"\n")
+                        f.write(sorttag+"|||"+usr["name"]+"|||"+title+"|||"+count+"|||"+illust+"\n")
             arialist=ms_arialist(pagecount,illustidlist,titlelist)
 
             for j in arialist:
-                  with open("resource/images/"+i+"/id-index.txt","w",encoding="utf-8") as f:
-                        f.write()
                   if cfg["OINF"] != True:
                         post_to_aria("resource",i,j["url"],j["out"],customkeylist,customvaulist,cfg["PORT"])
             

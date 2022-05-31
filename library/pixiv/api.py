@@ -15,8 +15,16 @@ def getinfo(api):
     apitext=get(api).text
     error="{\"illusts\":[],\"next_url\":null}"
     if apitext == error:
-        litelogger.errorlog("API is not available now")
-    rawjson=json.loads(apitext)
+        litelogger.errorlog("The date not available now")
+        return [],[],[],[],[]
+    if apitext == "{\"code\":500,\"msg\":\"请求失败\"}" or apitext=="获取失败":
+        litelogger.errorlog("Code:500")
+        return [],[],[],[],[]
+    try:
+        rawjson=json.loads(apitext)
+    except:
+        litelogger.errorlog("Code:404")
+        return [],[],[],[],[]
     illustidlist,titlelist,pagecount,tagslist,userlist=[],[],[],[],[]
     for i in rawjson["illusts"]:
         illustidlist.append(i["id"])

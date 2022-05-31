@@ -16,7 +16,7 @@ PORT=6800
 ARIA_LA=True
 #
 #仅获取信息不下载图片(True/False)
-OINF=False
+OINF=True
 #
 #
 #投稿相关(*为不限制)
