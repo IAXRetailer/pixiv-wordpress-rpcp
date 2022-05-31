@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from library.tool import litelogger
+from requests import get
 import json
 def post_to_aria(resourcefolder,date,url,out,customkeylist,customvaulist,rpcport):
     dicta={'refer': url,'dir':resourcefolder+"/images/"+date,"out":out}
@@ -22,3 +23,6 @@ def ms_arialist(pagecont,illustid,titlelist):
             for pagenum in range(1,int(page)+1):
                 arialist.append({"url":"https://pixiv.re/"+str(pid)+"-"+str(pagenum)+".jpg","out":title+" "+str(pagenum)+".jpg"})
     return arialist
+
+def aria_rpctest(port):
+    return get(f"http://127.0.0.1:{port}/jsonrpc?jsoncallback=test").status_code

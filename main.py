@@ -1,3 +1,4 @@
+from traceback import print_tb
 from library.pixiv import pixiv
 from library.tool import *
 from library.aria import *
@@ -136,7 +137,7 @@ def downloadui():
                   for j in arialist:
                         post_to_aria("resource",i,j["url"],j["out"],customkeylist,customvaulist,cfg["PORT"])
             else:
-                  litelogger.infolog("Only Information Mod has been opened")
+                  litelogger.infolog("Only Information Mod has been opened(.setting.OINF)")
             
       
 
@@ -220,7 +221,11 @@ litelogger.colorprint(title,Fore.GREEN)
 litelogger.infolog("Pick up config now...")
 cfg=reader.pickupcfg(".setting.txt")
 litelogger.infolog("Pick up finished")
+#print(aria.aria_rpctest(cfg["PORT"]))
 if cfg["ARIA_LA"]=="True":
-      system("Start aria2c --conf-path=./aria2.conf")
+      try:
+            aria.aria_rpctest(cfg["PORT"])
+      except:
+            system("Start aria2c --conf-path=./aria2.conf")
 while True:
       chosemode()
