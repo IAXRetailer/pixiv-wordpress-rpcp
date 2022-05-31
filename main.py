@@ -212,6 +212,7 @@ def chosemode():
             archiveui()
       if mode==4:
             litelogger.infolog("Pick up config now...")
+            global cfg
             cfg=reader.pickupcfg(".setting.txt")
             for i,j in cfg.items():
                   print(Fore.LIGHTWHITE_EX+i,Fore.LIGHTGREEN_EX+j)
