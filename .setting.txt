@@ -1,10 +1,10 @@
 #基础设置
 #用户名称
-USER=retailer673@163.com
+USER=admin@127.0.0.1
 #登录密码
-PASSWORD=retailer673@163.com
+PASSWORD=PASSWORD
 #目标网站
-SITE=https://xhacg.us/xmlrpc.php
+SITE=https://127.0.0.1/xmlrpc.php
 #
 #
 #下载相关

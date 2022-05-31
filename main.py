@@ -120,7 +120,7 @@ def bedpost():
             finimgs=sample
       for imgs,illustd in zip(finimgs,illustid):
             if illustd in imgs:
-                  Rawtags.append(illustid.index(illustd))
+                  Rawtags.append(tags[illustid.index(illustd)])
       for tagg in Rawtags:
             taggg=tagg.split(",%,")
             for tag in taggg:
