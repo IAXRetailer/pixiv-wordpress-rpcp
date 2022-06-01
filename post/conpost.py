@@ -4,7 +4,7 @@ from wordpress_xmlrpc.methods import posts
 import post as POSTAPI
 
 def post_new_article(title, content,cate,tag,state):
-    wp = Client(POSTAPI.SITE,POSTAPI.USER,POSTAPI.PASSWORD)
+    wp = Client(POSTAPI.SITE+"/xmlrpc.php",POSTAPI.USER,POSTAPI.PASSWORD)
     post = WordPressPost()
     post.title = title
     post.content = content 

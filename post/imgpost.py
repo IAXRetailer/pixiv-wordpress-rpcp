@@ -5,7 +5,7 @@ from wordpress_xmlrpc.methods import media, posts
 import post as POSTAPI
 
 def postimg(filename):
-	client = Client(POSTAPI.SITE,POSTAPI.USER,POSTAPI.PASSWORD)
+	client = Client(POSTAPI.SITE+"/xmlrpc.php",POSTAPI.USER,POSTAPI.PASSWORD)
 
 # prepare metadata
 	data = {
