@@ -69,7 +69,7 @@ def posterui():
       content=""
       while True:
             writein=input()
-            latecontent=content+"\n"+writer
+            latecontent=content+"\n"+writein
             if writein == "":
                   break
       content=""
@@ -142,7 +142,7 @@ def bedpost():
       content=""
       while True:
             writein=input()
-            latecontent=content+"\n"+writer
+            latecontent=content+"\n"+writein
             if writein=="":
                   break
       for surll in finimgs:
