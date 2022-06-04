@@ -67,10 +67,11 @@ def posterui():
             fintagsl=Rawtags
       print("Write the article content!")
       content=""
-      writein=""
-      while writein !="":
+      while True:
             writein=input()
             latecontent=content+"\n"+writer
+            if writein == "":
+                  break
       content=""
       for surll in siteimgsurl:
             content=content+"<img src=\""+str(surll)+"\">\n"
@@ -139,10 +140,11 @@ def bedpost():
             fintagsl=taglist
       print("Write the article content!")
       content=""
-      writein=""
-      while writein !="":
+      while True:
             writein=input()
             latecontent=content+"\n"+writer
+            if writein=="":
+                  break
       for surll in finimgs:
             content=content+"<img src=\""+str(surll)+"\">\n"
       
