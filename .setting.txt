@@ -1,12 +1,10 @@
 #基础设置
 #用户名称
-USER=
+USER=retailer673@163.com
 #登录密码
-PASSWORD=
-#发送模式(XMLRPC/REST)
-SENM=XMLRPC
+PASSWORD=retailer673@163.com
 #目标网站
-SITE=https://abc.def
+SITE=https://xhacg.us
 #
 #
 #下载相关
@@ -25,15 +23,15 @@ OINF=True
 #最大Tag数（tag将从选择的图片中随机选取,不填则无tag）
 MAX_TAG=
 #最大图片数
-MAX_PICTURE=2
+MAX_PICTURE=*
 #图片最大大小（字节大小）
 MAX_SIZE=5120000
 #自定义标题
 #$[date]为日期
-TITLE=Pixiv $[date] 精选合集（测试稿）
+TITLE=Pixiv $[date] 精选
 #分类（如果需要多个分类使用,切割,不填则无分类）
 CATE=
 #文章状态(private表示私密的，draft表示草稿，publish表示发布)
 STATE=draft
 #使用图床而不是从本地发送图片(True/False)
-BEDPOST=False
+BEDPOST=True

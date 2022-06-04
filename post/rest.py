@@ -1,7 +1,7 @@
 from requests import post
 import post as postAPI
 import json
-
+from . import uuida
 
 def getusertoken():
     
@@ -22,15 +22,20 @@ def getusertoken():
 
 def restimgpost(filename):
     API_MEDIA = postAPI.SITE + "/wp-json/wp/v2/media"
-    JWT_TOKEN = getusertoken()
+    #JWT_TOKEN = getusertoken()
     data = open(filename,'rb').read()
     #imgMime = gImageSuffixToMime[imgSuffix] # 'image/png'
     #imgeFilename = "%s.%s" % (processedGuid, imgSuffix) # 'f6956c30ef0b475fa2b99c2f49622e35.png'
-    authValue = "Bearer %s" % JWT_TOKEN
+    #authValue = "Bearer %s" % JWT_TOKEN
+    authValue={
+        "username":postAPI.USER,
+        "password":postAPI.PASSWORD
+        }
+    authValue=json.dumps(str(authValue))
     curHeaders = {
         "Authorization": authValue,
         "Content-Type": 'image/jpeg',
-        'Content-Disposition': 'picture.jpg',
+        'Content-Disposition': uuida.genrds(16),
         }
     #li.info("curHeaders=%s", curHeaders)
         # curHeaders={'Authorization': 'Bearer eyJ0xxxyyy.zzzB4', 'Content-Type': 'image/png', 'Content-Disposition': 'attachment; filename=f6956c30ef0b475fa2b99c2f49622e35.png'}
@@ -41,6 +46,7 @@ def restimgpost(filename):
             headers=curHeaders,
             data=data,
         )
+    print(str(json.loads(resp.text)))
 def restarticlepost(title,content):
     url=postAPI.SITE+"/wp-json/wp/v2/posts"
     data={

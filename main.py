@@ -1,6 +1,7 @@
 from library.pixiv import *
 from library.tool import *
 from library.aria import *
+from library.archive import *
 from os import listdir,system
 from shutil import rmtree,copyfile
 import post
@@ -64,11 +65,16 @@ def posterui():
             fintagsl=[]
       else:
             fintagsl=Rawtags
-      print("Write the article content!(/n is as CRLF)")
+      print("Write the article content!")
+      content=""
+      writein=""
+      while writein !="":
+            writein=input()
+            latecontent=content+"\n"+writer
       content=""
       for surll in siteimgsurl:
             content=content+"<img src=\""+str(surll)+"\">\n"
-      content=content+input().replace("/n","\n")
+      content=content+latecontent
       categorylist=[]
       pcategory=cfg["CATE"]
       if "," in pcategory:
@@ -131,11 +137,16 @@ def bedpost():
             fintagsl=[]
       else:
             fintagsl=taglist
-      print("Write the article content!(/n is as CRLF)")
+      print("Write the article content!")
       content=""
+      writein=""
+      while writein !="":
+            writein=input()
+            latecontent=content+"\n"+writer
       for surll in finimgs:
             content=content+"<img src=\""+str(surll)+"\">\n"
-      content=content+input().replace("/n","\n")
+      
+      content=content+latecontent
       categorylist=[]
       pcategory=cfg["CATE"]
       if "," in pcategory:

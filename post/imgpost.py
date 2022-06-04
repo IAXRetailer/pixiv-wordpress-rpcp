@@ -1,7 +1,7 @@
-from wordpress_xmlrpc import Client, WordPressPost
+from wordpress_xmlrpc import Client
 from wordpress_xmlrpc.compat import xmlrpc_client
-from wordpress_xmlrpc.methods import media, posts
-
+from wordpress_xmlrpc.methods import media
+from . import uuida
 import post as POSTAPI
 
 def postimg(filename):
@@ -9,7 +9,7 @@ def postimg(filename):
 
 # prepare metadata
 	data = {
-	'name': 'picture.jpg',
+	'name': uuida.genrds(16),
 	'type': 'image/jpeg',
 	}
 
